@@ -17,7 +17,8 @@ class Admin extends React.Component {
     return (
       <Layout className={less.fillBox}>
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
-          <div className={less.logo} />
+          <div className={less.logo}>
+          </div>
           <CusNav></CusNav>
         </Sider>
         <Layout>

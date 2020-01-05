@@ -64,6 +64,10 @@ react-redux 已下载
       return(data.data)
     }
     ```
+    父子传参 涉及到this 的函数 
+    1. 要用箭头函数
+    2. 或者是传递方法的时候 传递一个this过去
+      hehe={this.hehe.bind(this)}
 ### node 的小知识
   用到的插件
   - jsonwebtoken npm i jsonwebtoken  生成token

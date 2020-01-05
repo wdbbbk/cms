@@ -1,33 +1,57 @@
 import React from 'react'
-import { Drawer, Button, Select } from 'antd';
-import less from './drawer.module.less'
-const { Option } = Select;
+import { Button , Card ,message} from 'antd';
+import {changeVipMsg} from '../../../../api/manage/manage'
+// import less from './drawer.module.less'
+// const { Option } = Select;
 class DrawerBox extends React.Component{
-  constructor(){
+  constructor(props){
     super()
+    this.state=props.drawerdata
   }
-  componentDidMount(){
-    console.log(this)
-  }
+  componentWillReceiveProps(props){
+    let{petname,petage,petsex,hostname,hostphone,petimg}=props.drawerdata
+    this.setState({petname,petage,petsex,hostname,hostphone,petimg})
+  }                                 
   render(){
     return(
-        <Drawer 
-          closable={false}
-          width={600}
-          title="修改会员信息" //标题
-          visible={this.props.visible}
-        >
-          宠物名称:<input value={this.props.drawerdata.petname} onChange={(e)=>{
-            // value = e.target.value
+        <Card>
+          宠物名称:<input value={this.state.petname} onChange={(e)=>{
+             this.setState({petname:e.target.value}) 
           }}/>
-          宠物名称:<input />
-          宠物名称:<input />
-          宠物名称:<input />
+          宠物年龄:<input value={this.state.petage} onChange={(e)=>{
+             this.setState({petage:e.target.value}) 
+          }}/>
+          宠物性别:<input value={this.state.petsex} onChange={(e)=>{
+             this.setState({petsex:e.target.value}) 
+          }}/>
+          主人姓名
+          :<input value={this.state.hostname} onChange={(e)=>{
+             this.setState({hostname:e.target.value}) 
+          }}/>
+          主人联系方式:<input value={this.state.hostphone} onChange={(e)=>{
+             this.setState({hostphone:e.target.value}) 
+          }}/>
+          宠物照片:<input value={this.state.petimg} onChange={(e)=>{
+             this.setState({petimg:e.target.value}) 
+          }}/>
+          <Button onClick={()=>{
+            changeVipMsg(this.state)
+            .then((data)=>{
+              if(data.data.err ===1 ){
+                this.props.changeDrawer()
+                // window.location.reload()  刷新页面搞
+                message.success('会员信息修改成功');
+                this.props.getdata()
+              }
+            })
+
+          }}>修改</Button>
           <Button onClick={()=>{
             this.props.changeDrawer()
+            console.log(this.state)
           }}>取消</Button>
-        </Drawer>
+        </Card>
     )
   }
 }
-export default DrawerBox
+export default  DrawerBox
