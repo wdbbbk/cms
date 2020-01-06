@@ -35,11 +35,8 @@ router.post('/list',(req,res)=>{
   let{minNum,pageSize} = req.body
     VipManageModel.find()
     .then((data)=>{
-      if(minNum !== 'total'){
-        res.send({err:1,msg:'查询成功',data:data.splice(minNum,pageSize)})
-      }else{
-        res.send({err:1,msg:'查询成功',data:data})
-      }
+      let total = data.length
+      res.send({err:1,msg:'查询成功',data:data.splice(minNum,pageSize),total})
     })
   
 })

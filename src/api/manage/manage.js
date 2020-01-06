@@ -2,15 +2,12 @@ import axios from '../../utils/axios'
 // 查询用户信息
 export  const manageList = async (page, pageSize)=>{
   // 获取数据的区间
-  let minNum = 'total'
-  if(page !== 'total'){
-    minNum = (page-1)*pageSize
-  }
+  let minNum = (page-1)*pageSize
   let data = await axios.post('/cms/Vipmanage/list',
     //携带的参数 1. 开始的索引  2. 每一页显示的条数 
     {minNum, pageSize}
   )
-  return(data.data.data)
+  return(data)
 }
 //会员添加
 export  const manageAdd = async (data)=>{

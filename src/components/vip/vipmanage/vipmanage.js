@@ -19,45 +19,52 @@ class UserManage extends React.Component{
       columns:
       [
         {
-          title: '宠物名称',
+          title: '会员编号',
           dataIndex: 'petname',
           key: 'petname',
           width:100,
         },
         {
-          title: '宠物年龄',
+          title: '会员姓名',
           dataIndex: 'petage',
           key: 'petage',
           width:100,
         },
         {
-          title: '宠物性别',
+          title: '会员卡号',
           dataIndex: 'petsex',
           key: 'petsex',
           width:100,
         },
         {
-          title: '主人姓名',
+          title: '会员级别',
           dataIndex: 'hostname',
           key: 'hostname',
           width:100,
         },
         {
-          title: '主人手机号码',
+          title: '手机号码',
           dataIndex: 'hostphone',
           key: 'hostphone',
           width:100,
         },
         {
-          title: '宠物照片',
+          title: '剩余余额',
+          dataIndex: 'petimg',
+          key: 'petimg',
+          width:100,
+        },
+        {
+          title: '宠物登记',
+          dataIndex: 'petimg',
+          key: 'petimg',
+          width:100,
+        },
+        {
+          title: '消费记录',
           dataIndex: 'petimg',
           key: 'petimg',
           width:200,
-          render(data){
-            return(
-              <img width='80' height='80' src={data} alt=''/>
-            )
-          }
         },
         {
           title: '操作',
@@ -66,14 +73,14 @@ class UserManage extends React.Component{
           render:(res)=>{
             return(
               <Fragment>
-                <Button type="danger" onClick={()=>{
-                  this.showDeleteConfirm(res._id)
-                }}>删除</Button>
                 <Button 
                   onClick={()=>{
                     this.setState({drawerdata:res,visible:true})
                   }}
                 >修改</Button>
+                <Button type="danger" onClick={()=>{
+                  this.showDeleteConfirm(res._id)
+                }}>删除</Button>
               </Fragment>
             )
           }
@@ -115,21 +122,14 @@ class UserManage extends React.Component{
     manageList(page, pageSize)
     .then((data)=>{
       this.setState({loading:false})
-      this.setState({data})
+      this.setState({data:data.data.data,total:data.data.total})
     })
   } 
   //声明周期
   componentDidMount(){
     // 获取指定的信息的
-    this.getdata(1,5)
-
-    //单纯的获取页数的
-    manageList('total')
-    .then((data)=>{
-      console.log(data)
-      this.setState({total:data.length})
-    })
-   
+    // this.getdata(1,5)
+    this.setState({loading:false})
   }
   render(){
     return(
