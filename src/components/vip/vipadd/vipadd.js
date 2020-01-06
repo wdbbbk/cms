@@ -38,7 +38,6 @@ class Vipadd extends React.Component{
         宠物性别:{getFieldDecorator('petsex', {})(
             <Input/>,
           )}
-        
         主人名字:{getFieldDecorator('hostname', {
            rules: [{required: true, message: 'Please input your username!' }],
         })(
@@ -47,12 +46,31 @@ class Vipadd extends React.Component{
         联系方式:{getFieldDecorator('hostphone', {})(
             <Input/>,
           )}
+        {getFieldDecorator('petimg', {})(
+            <Input className={less.petimg}/>
+        )}
+
         {/* 宠物照片 */}
-        <Upload>
-          <Button>
-            <Icon type="upload" /> Click to Upload
+        {/* <Upload ref='petimg'>
+          <Button onClick={()=>{
+            console.log(this.refs.petimg)
+          }}>
+            <Icon type="upload" />
+            上传宠物照片
           </Button>
-        </Upload>
+        </Upload> */}
+        <input type='file' ref='petimg'/>
+        <img ref='showpetimg' src=''/>
+        <Button onClick={()=>{
+          let reader = new FileReader()
+          reader.readAsDataURL(this.refs.petimg.files[0])
+          reader.onload = ()=>{
+            // 读到base64以后放到input框里
+            this.props.form.setFieldsValue({petimg:reader.result})
+            message.success('图片上传成功')
+            this.refs.showpetimg.src=reader.result
+          }
+        }}>上传</Button>
         <Button type="primary" 
           loading={this.state.iconLoading}
           onClick={()=>{

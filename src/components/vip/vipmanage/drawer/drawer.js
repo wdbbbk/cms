@@ -2,19 +2,18 @@ import React from 'react'
 import { Button , Card ,message} from 'antd';
 import {changeVipMsg} from '../../../../api/manage/manage'
 // import less from './drawer.module.less'
-// const { Option } = Select;
 class DrawerBox extends React.Component{
   constructor(props){
     super()
     this.state=props.drawerdata
   }
   componentWillReceiveProps(props){
-    let{petname,petage,petsex,hostname,hostphone,petimg}=props.drawerdata
-    this.setState({petname,petage,petsex,hostname,hostphone,petimg})
+    let{petname,petage,petsex,hostname,hostphone,petimg,_id}=props.drawerdata
+    this.setState({petname,petage,petsex,hostname,hostphone,petimg,_id})
   }                                 
   render(){
     return(
-        <Card>
+      <Card>
           宠物名称:<input value={this.state.petname} onChange={(e)=>{
              this.setState({petname:e.target.value}) 
           }}/>
@@ -31,24 +30,39 @@ class DrawerBox extends React.Component{
           主人联系方式:<input value={this.state.hostphone} onChange={(e)=>{
              this.setState({hostphone:e.target.value}) 
           }}/>
-          宠物照片:<input value={this.state.petimg} onChange={(e)=>{
-             this.setState({petimg:e.target.value}) 
-          }}/>
+          宠物照片:<img ref='petimg' width='80' src={this.state.petimg}/>
+          <input type='file' ref='petimginput'/>
+
           <Button onClick={()=>{
-            changeVipMsg(this.state)
-            .then((data)=>{
-              if(data.data.err ===1 ){
-                this.props.changeDrawer()
-                // window.location.reload()  刷新页面搞
-                message.success('会员信息修改成功');
-                this.props.getdata()
-              }
-            })
+            let reader = new FileReader()
+            reader.readAsDataURL(this.refs.petimginput.files[0])
+            reader.onload = ()=>{
+              // 读到base64以后放到input框里
+              this.refs.petimg.src=reader.result
+              this.state.petimg = reader.result
+              message.success('图片上传成功')
+            }
+          }}>上传</Button>
+
+          <Button onClick={()=>{
+            let reader = new FileReader()
+            reader.readAsDataURL(this.refs.petimginput.files[0])
+            reader.onload = ()=>{
+              this.state.petimg=reader.result
+              console.log(reader.result)
+              changeVipMsg(this.state)
+              .then((data)=>{
+                if(data.data.err ===1 ){
+                  this.props.changeDrawer()
+                  message.success('会员信息修改成功');
+                  this.props.getdata(this.props.page,this.props.pageSize)
+                }
+              })
+            }
 
           }}>修改</Button>
           <Button onClick={()=>{
             this.props.changeDrawer()
-            console.log(this.state)
           }}>取消</Button>
         </Card>
     )
