@@ -73,3 +73,4 @@ router.get('/reg',(req,res)=>{
 // 将这个router抛出
 // 因为在主文件 里要用到
 module.exports = router
+

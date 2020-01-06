@@ -6,6 +6,10 @@ const Admin = loadRouter(()=>import('../Pages/Admin/admin'))
 const Home = loadRouter(()=>import('../Pages/Admin/Home/home'))
 const vipmanage = loadRouter(()=>import('../components/vip/vipmanage/vipmanage'))
 const vipadd = loadRouter(()=>import('../components/vip/vipadd/vipadd'))
+const ShoppingToy = loadRouter(()=>import('../components/shopping/shoppingToy/shoppingToy'))
+const ShoppingSnacks = loadRouter(()=>import('../components/shopping/shoppingSnacks/shoppingSnacks'))
+const ShoppingFood = loadRouter(()=>import('../components/shopping/shoppingFood/shoppingFood'))
+
 class router extends React.Component{
   render(){
     return(
@@ -22,6 +26,10 @@ class router extends React.Component{
                   {/*  */}
                   <Route exact path='/admin/vip/vipmanage' component={vipmanage}></Route>
                   <Route exact path='/admin/vip/vipadd' component={vipadd}></Route>
+                  {/* 商品路由 */}
+                  <Route exact path='/admin/shopping/toy' component={ShoppingToy}></Route>
+                  <Route exact path='/admin/shopping/snacks' component={ShoppingSnacks}></Route>
+                  <Route exact path='/admin/shopping/food' component={ShoppingFood}></Route>
                 </Switch>
               </Admin>
             )
