@@ -70,25 +70,24 @@ let arr = [
   {
     name:'商品',
     id:'3',
-    path:'/admin/goods',
     Icon:'coffee',
     children:[
       {
         name:'日用家居',
         id:'3_0',
-        path:'/admin/serve/petfoster',
+        path:'/admin/shopping/toy',
         Icon:'database',
       },
       {
         name:'犬猫零食',
         id:'3_1',
-        path:'/admin/serve/petwipeworm',
+        path:'/admin/shopping/snacks',
         Icon:'database',
       },
       {
         name:'犬猫主粮',
         id:'3_2',
-        path:'/admin/serve/petvaccine',
+        path:'/admin/shopping/food',
         Icon:'database',
       },
     ]

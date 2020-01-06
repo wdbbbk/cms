@@ -32,3 +32,5 @@ export  const delVip = async (_id)=>{
   )
   return(res)
 }
+
+
