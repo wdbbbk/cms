@@ -1,11 +1,14 @@
 import React, { Component,Fragment } from 'react'
 import { Table , Pagination,  Button ,Spin , Modal ,Drawer, message,Card,Icon,Radio} from 'antd';
 import SpLess from './shoppingTop.module.less'
+import {SpList,SpListdel} from '../../../api/shopping/spList'
+import Spup from '../shoppingToy/spup/soup'
 export class ShoppingToy extends Component {
   constructor(){
     super()
     this.state = {
-      size: 'large',
+      visible:true, // 控制抽屉显示隐藏
+      size: 'large', // button 按钮需要
       columns: //表头数据
       [
         {
@@ -51,7 +54,13 @@ export class ShoppingToy extends Component {
                   }}
                 >修改</Button>
                 <Button type="danger" onClick={()=>{
-                  this.showDeleteConfirm(res._id)
+                  let _id = res._id
+                  SpListdel(_id).then(()=>{
+                    SpList()
+                      .then((data)=>{
+                        this.data= this.setState({data})
+                      })
+                  })
                 }}>删除</Button>
               </Fragment>
             )
@@ -59,16 +68,27 @@ export class ShoppingToy extends Component {
         },
       ],
       data:[ // 列表数据
-        {
-          spname:'spname',
-          img:'老大',
-          price:'666',
-          brand:'艾森',
-          inventory:'186'
-        }
+        
       ]
     }
   }
+  componentDidMount(){
+    SpList()
+    .then((data)=>{
+      this.data= this.setState({data})
+    })
+  }
+  showDrawer = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  onClose = () => {
+    this.setState({
+      visible: false,
+    });
+  };
   render() {
     return (
       <Fragment>
@@ -86,9 +106,22 @@ export class ShoppingToy extends Component {
                 icon="plus" 
                 size={this.size}
                 className={SpLess['Tab-add']}
+                onClick={()=>{}}
         >
           添加商品
         </Button>
+        {/* 商品更新的抽屉 */}
+        <Drawer
+          title="Basic Drawer"
+          placement="right"
+          closable={false}
+          onClose={this.onClose}
+          visible={this.state.visible}
+        >
+          <Spup></Spup>
+
+        </Drawer>
+        
         {/* 分页 */}
         <Pagination simple defaultCurrent={2} total={50} 
                     className={SpLess['Tab-pagination']}

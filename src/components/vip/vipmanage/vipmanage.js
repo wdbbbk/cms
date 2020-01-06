@@ -15,7 +15,7 @@ class UserManage extends React.Component{
       loading:true,
       page:1,
       pageSize:5,
-      total:111,
+      total:1,
       columns:
       [
         {
@@ -95,8 +95,8 @@ class UserManage extends React.Component{
       onOk:()=> {
         delVip(_id)
         .then(()=>{
-          message.success('删除成功')
           this.getdata(this.state.page,this.state.pageSize)
+          message.success('删除成功')
         })
       },
       onCancel() {
@@ -114,21 +114,22 @@ class UserManage extends React.Component{
   getdata=(page, pageSize)=>{
     manageList(page, pageSize)
     .then((data)=>{
-      console.log(data)
       this.setState({loading:false})
       this.setState({data})
     })
   } 
   //声明周期
   componentDidMount(){
+    // 获取指定的信息的
+    this.getdata(1,5)
+
     //单纯的获取页数的
     manageList('total')
     .then((data)=>{
       console.log(data)
       this.setState({total:data.length})
     })
-    // 获取指定的信息的
-    this.getdata(1,5)
+   
   }
   render(){
     return(
@@ -139,8 +140,7 @@ class UserManage extends React.Component{
           title="修改会员信息" //标题
           visible={this.state.visible}
         >
-          <DrawerBox getdata={this.getdata} changeDrawer={this.changeDrawer} visible={this.state.visible} drawerdata={this.state.drawerdata}></DrawerBox>
-        
+          <DrawerBox page={this.state.page} pageSize={this.state.pageSize} getdata={this.getdata} changeDrawer={this.changeDrawer} visible={this.state.visible} drawerdata={this.state.drawerdata}></DrawerBox>
         </Drawer>
         <Spin spinning={this.state.loading}>
           <div  className={less.CardBox}>

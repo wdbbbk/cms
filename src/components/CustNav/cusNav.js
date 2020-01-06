@@ -16,16 +16,16 @@ let arr = [
     Icon:'user',
     children:[
       {
-        name:'会员管理',
-        id:'1_0',
-        path:'/admin/vip/vipmanage',
-        Icon:'solution',
-      },
-      {
         name:'会员添加',
         id:'1_1',
         path:'/admin/vip/vipadd',
         Icon:'user-add',
+      },
+      {
+        name:'会员管理',
+        id:'1_0',
+        path:'/admin/vip/vipmanage',
+        Icon:'solution',
       },
       {
         name:'会员提醒',

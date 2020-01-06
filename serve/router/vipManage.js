@@ -13,9 +13,8 @@ const VipManageModel = require('../db/model/Vipmanage')   // 用于增删改查
  * @apiSuccess {String} msg 信息提示.
  */
 // 添加会员接口
-router.get('/add',(req,res)=>{
-  const{petname,petage,petsex,hostname,hostphone,petimg} = req.query
-  console.log(petname,petage,petsex,hostname,hostphone,petimg)
+router.post('/add',(req,res)=>{
+  const{petname,petage,petsex,hostname,hostphone,petimg} = req.body
   VipManageModel.insertMany({petname,petage,petsex,hostname,hostphone,petimg})
   res.send({err:1,msg:'添加成功'})
 })
@@ -32,9 +31,8 @@ router.get('/add',(req,res)=>{
  * @apiSuccess {String} msg 信息提示.
  */
 // 获取vip的列表
-router.get('/list',(req,res)=>{
-  let{minNum,pageSize} = req.query
-  console.log(minNum,pageSize)
+router.post('/list',(req,res)=>{
+  let{minNum,pageSize} = req.body
     VipManageModel.find()
     .then((data)=>{
       if(minNum !== 'total'){
@@ -57,8 +55,9 @@ router.get('/list',(req,res)=>{
  * @apiSuccess {String} msg 信息提示.
  */
 // 修改vip信息
-router.get('/changeVipMsg',(req,res)=>{
-  let{petname,petage,petsex,hostname,hostphone,petimg,_id}=req.query
+router.post('/changeVipMsg',(req,res)=>{
+  let{petname,petage,petsex,hostname,hostphone,petimg,_id}=req.body
+  console.log(_id)
   VipManageModel.updateOne({_id},{petname,petage,petsex,hostname,hostphone,petimg})
   .then((data)=>{
     res.send({err:1,msg:'更改成功',data:data})
@@ -75,8 +74,8 @@ router.get('/changeVipMsg',(req,res)=>{
  * @apiSuccess {String} msg 信息提示.
  */
 // 删除会员信息
-router.get('/delVip',(req,res)=>{
-  let{_id}=req.query
+router.post('/delVip',(req,res)=>{
+  let{_id}=req.body
   VipManageModel.deleteMany({_id})
   .then((data)=>{
     res.send({err:1,msg:'删除成功',data:data})
