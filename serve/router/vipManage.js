@@ -26,7 +26,6 @@ router.post('/petAdd',(req,res)=>{
   console.log(petimg)
   VipManageModel.updateOne({_id},{petSex,Nobaby,petName,petSpecies,petAge,petBreed,petHeight,petWeight,petRemarks,petimg})
   .then((data)=>{
-    console.log(data)
     res.send({err:1,msg:'添加成功'})
   })
 })
@@ -48,7 +47,6 @@ router.post('/list',(req,res)=>{
     VipManageModel.find()
     .then((data)=>{
       let total = data.length
-      console.log(data)
       res.send({err:1,msg:'查询成功',data:data.splice(minNum,pageSize),total})
     })
 })
