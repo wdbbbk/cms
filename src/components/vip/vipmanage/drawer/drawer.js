@@ -1,13 +1,8 @@
 import React from 'react'
-import { Button , Card ,message ,Upload ,Icon,Input} from 'antd';
+import { Button , Card ,message ,Input} from 'antd';
 import {changeVipMsg} from '../../../../api/manage/manage'
 import UploadImg from '../../../upload/upload'
 import less from './drawer.module.less'
-function getBase64(img, callback) {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
-  reader.readAsDataURL(img);
-}
 
 class DrawerBox extends React.Component{
   constructor(props){
@@ -23,15 +18,8 @@ class DrawerBox extends React.Component{
     this.setState({petimg:base64})
   }                         
   render(){
-    const uploadButton = (
-      <div>
-        <Icon type={this.state.loading ? 'loading' : 'plus'} />
-        <div className="ant-upload-text">Upload</div>
-      </div>
-    );
-    const { imageUrl } = this.state;
     return(
-      <Card className={less.cardBox}>
+      <Card className={less.drawerCardBox}>
           会员名称:<Input value={this.state.vipName}  onChange={(e)=>{
              this.setState({vipName:e.target.value}) 
           }}/>

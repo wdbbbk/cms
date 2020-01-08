@@ -1,8 +1,9 @@
 import React,{Fragment} from 'react'
 import less from './vipadd.module.less'
 import {manageAdd} from '../../../api/manage/manage'
-import { Card , Form, Input, Button ,message,DatePicker,Radio ,Select ,Icon } from 'antd';
+import { Card , Form, Input, Button ,message,DatePicker,Radio ,Select  } from 'antd';
 import PetAdd from './petadd/petadd'
+import AddSuccess from './addSuccess/addSuccess';
 
 //创建类组件
 class Vipadd extends React.Component{
@@ -34,20 +35,30 @@ class Vipadd extends React.Component{
   handleSubmit = e => {
     // e.preventDefault();
     this.props.form.validateFields((err, values) => {
-      this.setState({iconLoading:true})
       values.payStyle=this.state.payStyle
       values.sexvalue=this.state.sexvalue
-      values.newTransactionTime=this.state.newTransactionTime._d
-      // console.log('Received values of form: ', values);
-      // let{vipName,vipPhone,vipSite,transactionTime,payMoney,giveMoney,remarks} = values
-      manageAdd(values)
-      .then((data)=>{
-        console.log(data)
-        if(data.data.err){
-          message.success('会员信息添加成功');
-          this.setState({iconLoading:false,petreg:true,_id:data.data._id})
-        }
-      })
+      values.newTransactionTime=this.state.newTransactionTime
+      values.timestamp = new Date().getTime()
+      let {vipName,vipPhone,transactionTime,payMoney,giveMoney} = values
+      if(!vipName||!vipPhone||!transactionTime||!payMoney||!giveMoney){
+        message.error('请输入完整的信息');
+        return
+      }else{
+        values.newTransactionTime=this.state.newTransactionTime._d
+        // let{vipName,vipPhone,vipSite,transactionTime,payMoney,giveMoney,remarks} = values
+        manageAdd(values)
+        .then((data)=>{
+          this.setState({iconLoading:true})
+          console.log(data)
+          if(data.data.err){
+            message.success('会员信息添加成功');
+            this.setState({iconLoading:false,petreg:true,_id:data.data._id})
+          }else{
+            this.setState({iconLoading:false})
+            message.error('添加失败,此手机号会员已经注册,请核对信息');
+          }
+        })
+      }
     });
   };
   render(){
@@ -117,6 +128,7 @@ class Vipadd extends React.Component{
           {/* 上传图片组件 */}
           {/* <UploadImg changeMyImg={this.changeMyImg}></UploadImg> */}
           <Button type="primary" 
+          disabled={!this.state.petreg?'':'disabled'} 
             className={less.vipAdd}
             loading={this.state.iconLoading}
             onClick={()=>{
@@ -127,6 +139,7 @@ class Vipadd extends React.Component{
           </Card>
         </Form>
         <PetAdd petreg={this.state.petreg} _id={this.state._id}></PetAdd>
+        <AddSuccess></AddSuccess>
       </Fragment>
     )
   }

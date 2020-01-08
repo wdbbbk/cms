@@ -1,6 +1,6 @@
 // {petSex,Nobaby,petName,petSpecies,petAge,petBreed,petHeight,petWeight,petRemarks}
 import React from 'react'
-import { Card , Form, Input, Button ,message,DatePicker,Radio ,Select ,Icon } from 'antd';
+import { Card , Form, Input, Button ,message,Radio } from 'antd';
 import less from '../vipadd.module.less'
 import {petAdd} from '../../../../api/manage/manage'
 import UploadImg from '../../../upload/upload'
@@ -32,20 +32,23 @@ class PetAdd extends React.Component{
   handleSubmit = e => {
     // e.preventDefault();
     this.props.form.validateFields((err, values) => {
-      this.setState({iconLoading:true})
       values.petSex = this.state.petSex
       values.Nobaby = this.state.Nobaby
       values._id = this.state._id
       values.petimg = this.state.petimg
-      console.log(values)
-      //宠物信息的添加
-      petAdd(values)
-      .then((data)=>{
-        this.setState({iconLoading:false})
-        message.success('宠物信息添加成功');
-      })
-
-
+      let {petSex,Nobaby,petName,petSpecies,petAge,petBreed,petHeight,petWeight,petimg}=values
+      if(!petSex||!Nobaby||!petName||!petSpecies||!petAge||!petBreed||!petHeight||!petWeight||!petimg){
+        message.error('请输入完整的宠物信息');
+      }else{
+        this.setState({iconLoading:true})
+        console.log(values)
+        //宠物信息的添加
+        petAdd(values)
+        .then((data)=>{
+          this.setState({iconLoading:false})
+          message.success('宠物信息添加成功');
+        })
+      }
     });
   };
   componentWillReceiveProps(props){
@@ -53,7 +56,6 @@ class PetAdd extends React.Component{
   }
   render(){
     const { getFieldDecorator } = this.props.form;
-    const { TextArea } = Input;
     let {petreg} = this.state
     return(
         <Form>
