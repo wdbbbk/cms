@@ -54,13 +54,13 @@ let arr = [
         Icon:'database',
       },
       {
-        name:'宠物驱虫',
+        name:'单项美容',
         id:'2_1',
         path:'/admin/serve/petwipeworm',
         Icon:'database',
       },
       {
-        name:'宠物疫苗',
+        name:'寄养管理',
         id:'2_2',
         path:'/admin/serve/petvaccine',
         Icon:'database',

@@ -11,6 +11,7 @@ class DrawerBox extends React.Component{
     this.state.loading= false
   }
   componentWillReceiveProps(props){
+    console.log(props)
     let{vipName,petHeight,petWeight,vipSite,vipPhone,petimg,petName,Nobaby,_id}=props.drawerdata
     this.setState({vipName,petHeight,petWeight,vipSite,vipPhone,petimg,petName,Nobaby,_id})
   }        
