@@ -7,7 +7,8 @@ export class ShoppingToy extends Component {
   constructor(){
     super()
     this.state = {
-      visible:true, // 控制抽屉显示隐藏
+      alState:true,// 用来控制抽屉的切换
+      visible:false, // 控制抽屉显示隐藏
       size: 'large', // button 按钮需要
       columns: //表头数据
       [
@@ -50,7 +51,7 @@ export class ShoppingToy extends Component {
               <Fragment>
                 <Button 
                   onClick={()=>{
-                    this.setState({drawerdata:res,visible:true})
+                    this.setState({alState:false,visible:true})
                   }}
                 >修改</Button>
                 <Button type="danger" onClick={()=>{
@@ -106,13 +107,15 @@ export class ShoppingToy extends Component {
                 icon="plus" 
                 size={this.size}
                 className={SpLess['Tab-add']}
-                onClick={()=>{}}
+                onClick={()=>{
+                  this.setState({alState:true,visible:true})
+                }}
         >
           添加商品
         </Button>
         {/* 商品更新的抽屉 */}
         <Drawer
-          title="Basic Drawer"
+          title={this.state.alState?'添加商品':'修改商品'}
           placement="right"
           closable={false}
           onClose={this.onClose}
@@ -121,6 +124,7 @@ export class ShoppingToy extends Component {
           <Spup></Spup>
 
         </Drawer>
+        
         
         {/* 分页 */}
         <Pagination simple defaultCurrent={2} total={50} 
