@@ -7,6 +7,6 @@ let SpManageSchema = mongoose.Schema({
   inventory:{type:Number,equire:true},
 })
 // schema对象与数据库建立联系
-let SpManageModel = mongoose.model('spManage',SpManageSchema)
+let SpManageModel = mongoose.model('spManage',SpManageSchema) //第一个参数 表名 第二个参数 schema集合
 // 抛出去
-module.exports = SpManageModel
+module.exports = SpManageModel  //抛出
