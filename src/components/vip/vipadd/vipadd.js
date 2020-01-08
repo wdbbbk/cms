@@ -4,6 +4,10 @@ import {manageAdd} from '../../../api/manage/manage'
 import { Card , Form, Input, Button ,message,DatePicker,Radio ,Select  } from 'antd';
 import PetAdd from './petadd/petadd'
 import AddSuccess from './addSuccess/addSuccess';
+import locale from 'antd/es/date-picker/locale/zh_CN';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+moment.locale('zh-cn');
 
 //创建类组件
 class Vipadd extends React.Component{
@@ -96,7 +100,7 @@ class Vipadd extends React.Component{
           <div className={less.transactionTime}>
             <span className={less.firstspan}>办理时间 :</span>
             {getFieldDecorator('transactionTime', {})(
-              <DatePicker onChange={this.onChangeTime} />
+              <DatePicker  locale={locale} onChange={this.onChangeTime} />
             )}
           </div>
           <div className={less.payMoney}>

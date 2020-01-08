@@ -40,12 +40,24 @@ router.post('/add',(req,res)=>{
  */  
 // 查找商品 接口
 router.post('/inquiry',(req,res)=>{
-  // const {spname,img,price,brand,inventory} = req.body
+  const {size,pageSize} = req.body
+  console.log(size,pageSize)
+  // start =  (page--)*pageSize // 开始截取
+  // end = page*pageSize-1  // 结束截取
+   // 1 7 0-6
+   // 2 7 7-13
+   // 3 7 14-
+   // 4 7 27-
   // console.log(spname,img,price,brand,inventory)
   spManage.find()
-  .then((data)=>{
-    res.send({data})
+  .then(data=>{
+    let datalength = data.length
+    spManage.find().limit(pageSize).skip(size) //查找 截几条 第几条开始截  
+    .then((data)=>{
+      res.send({data,datalength})
+    })
   })
+  
 })
 
 
