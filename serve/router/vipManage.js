@@ -14,16 +14,22 @@ const VipManageModel = require('../db/model/Vipmanage')   // 用于增删改查
  */
 // 添加会员接口
 router.post('/add',(req,res)=>{
-  const{vipName,vipPhone,vipSite,newTransactionTime,payMoney,giveMoney,remarks,petimg} = req.body
-  VipManageModel.insertMany({vipName,vipPhone,vipSite,newTransactionTime,payMoney,giveMoney,remarks,petimg})
-  .then((data)=>{
-    res.send({err:1,msg:'添加成功',_id:data[0]._id})
+  const{vipName,vipPhone,vipSite,newTransactionTime,payMoney,giveMoney,remarks,petimg,timestamp} = req.body
+  VipManageModel.find({vipPhone})
+  .then(data=>{
+    if(data.length){
+      res.send({err:0,msg:'添加失败,此手机号会员已经注册'})
+    }else{
+      VipManageModel.insertMany({vipName,vipPhone,vipSite,newTransactionTime,payMoney,giveMoney,remarks,petimg,timestamp})
+      .then((data)=>{
+        res.send({err:1,msg:'添加成功',_id:data[0]._id})
+      })
+    }
   })
 })
 //宠物添加接口
 router.post('/petAdd',(req,res)=>{
   const{_id,petSex,Nobaby,petName,petSpecies,petAge,petBreed,petHeight,petWeight,petRemarks,petimg} = req.body
-  console.log(petimg)
   VipManageModel.updateOne({_id},{petSex,Nobaby,petName,petSpecies,petAge,petBreed,petHeight,petWeight,petRemarks,petimg})
   .then((data)=>{
     res.send({err:1,msg:'添加成功'})
@@ -43,9 +49,12 @@ router.post('/petAdd',(req,res)=>{
  */
 // 获取vip的列表
 router.post('/list',(req,res)=>{
-  let{minNum,pageSize} = req.body
-    VipManageModel.find()
+  let{minNum,pageSize,arrow,sortcol} = req.body
+  arrow = arrow || -1    // 默认按时间排序 倒序排列
+  sortcol = sortcol || 'timestamp' // 默认按时间排序 倒序排列
+    VipManageModel.find().sort({[sortcol]: arrow})
     .then((data)=>{
+      console.log(data)
       let total = data.length
       res.send({err:1,msg:'查询成功',data:data.splice(minNum,pageSize),total})
     })
@@ -86,6 +95,15 @@ router.post('/delVip',(req,res)=>{
   VipManageModel.deleteMany({_id})
   .then((data)=>{
     res.send({err:1,msg:'删除成功',data:data})
+  })
+})
+// 按需查询会员信息
+router.post('/queryVip',(req,res)=>{
+  let{value}=req.body
+  let reg = RegExp(value)
+  VipManageModel.find({$or:[{vipPhone:reg},{vipName:reg},{petName:reg}]})
+  .then((data)=>{
+    res.send({err:1,msg:'查询成功',data:data})
   })
 })
 module.exports = router

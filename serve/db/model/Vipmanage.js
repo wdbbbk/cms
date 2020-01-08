@@ -10,6 +10,7 @@ let VipManageSchema = mongoose.Schema({
   vipGrade:{type:String,default:'银卡'}, //会员等级
   vipID:{type:String,default:'0001'}, // 会员id
   vipIDcard:{type:String,default:'0001'}, //会员卡id
+  timestamp:{type:String,require:true}, //注册时间的时间戳 排序用的
   // 宠物的信息
   petSex:{type:String,require:true},
   Nobaby:{type:String,require:true},

@@ -16,6 +16,7 @@ class UserManage extends React.Component{
       page:1,
       pageSize:5,
       total:1,
+      data:[], //这个页面的数据
       columns:
       [
         {
@@ -48,7 +49,7 @@ class UserManage extends React.Component{
         },
         {
           align:'center',
-          title: '剩余余额',
+          title: '余额',
           dataIndex: 'payMoney',
           key: 'payMoney',
           width:100,
@@ -97,7 +98,7 @@ class UserManage extends React.Component{
         },
       ]
       ,
-      data:[]
+      
     }
   }
   // 删除按钮
@@ -126,12 +127,23 @@ class UserManage extends React.Component{
   changeDrawer=(data)=>{
     this.setState({visible:!this.state.visible})
   }
+  //查询控制loading的方法
+  loadingfn=(value)=>{
+    this.setState({loading:value})
+  }
+  // 排序查询数据
+  sortfn=()=>{
+  }
+  // 根据查询跟新数据
+  queryUpdata=(data)=>{
+    this.setState({data:data})
+    this.setState({loading:false})
+  }
  
   // 获取数据的函数
-  getdata=(page, pageSize)=>{
-    manageList(page, pageSize)
+  getdata=(page, pageSize,arrow,sortcol)=>{
+    manageList(page, pageSize,arrow,sortcol)
     .then((data)=>{
-      console.log(data)
       this.setState({loading:false})
       this.setState({data:data.data.data,total:data.data.total})
     })
@@ -144,7 +156,7 @@ class UserManage extends React.Component{
   render(){
     return(
       <Fragment>
-        <HaederQuery></HaederQuery>
+        <HaederQuery getdata={this.getdata} queryUpdata={this.queryUpdata} loadingfn={this.loadingfn} loading={this.state.loading}></HaederQuery>
         <Drawer 
           width={600}
           onClose={()=>{this.setState({visible:false})}}
