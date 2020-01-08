@@ -41,7 +41,7 @@ class DrawerBox extends React.Component{
           是否绝育:<Input value={this.state.Nobaby} onChange={(e)=>{
              this.setState({Nobaby:e.target.value}) 
           }}/>
-          <UploadImg callback={this.callback}></UploadImg>
+          <UploadImg callback={this.callback} imageUrl={this.state.petimg}></UploadImg>
           <Button onClick={()=>{
             changeVipMsg(this.state)
             .then((data)=>{

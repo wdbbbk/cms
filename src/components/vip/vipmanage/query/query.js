@@ -44,12 +44,12 @@ class HaederQuery extends React.Component{
         />
       <div className={less.sort}>
         <span className={less.titleText}>排序方式 :</span>
-        <Select defaultValue="请选择" onChange={this.handleChange} width={200}>
+        <Select defaultValue="请选择" onChange={this.handleChange} style={{width:'100px'}}>
           <Option value="vipGrade" >等级</Option>
-          <Option value="vipID" >编号</Option>
           <Option value="payMoney">余额</Option>
-          <Option value="timestamp">日期</Option>
-          <Option value="消费">消费</Option>
+          <Option value="vipID" >会员编号</Option>
+          <Option value="timestamp">注册日期</Option>
+          <Option value="消费">消费金额</Option>
         </Select>
       </div>
       {/* 正序倒序按钮 */}

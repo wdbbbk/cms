@@ -20,10 +20,27 @@ router.post('/add',(req,res)=>{
     if(data.length){
       res.send({err:0,msg:'添加失败,此手机号会员已经注册'})
     }else{
-      VipManageModel.insertMany({vipName,vipPhone,vipSite,newTransactionTime,payMoney,giveMoney,remarks,petimg,timestamp})
-      .then((data)=>{
-        res.send({err:1,msg:'添加成功',_id:data[0]._id})
+      VipManageModel.find().limit(1)
+      .then(data=>{
+        if(data.length){
+          VipManageModel.find().sort({'vipID': -1}).limit(1)
+          .then(data=>{
+            let vipID =  Number(data[0].vipID)+ 1
+            VipManageModel.insertMany({vipID,vipName,vipPhone,vipSite,newTransactionTime,payMoney,giveMoney,remarks,petimg,timestamp})
+            .then((data)=>{
+              res.send({err:1,msg:'添加成功',_id:data[0]._id})
+            })
+          })
+        }else{
+          let vipID = 1
+          VipManageModel.insertMany({vipID,vipName,vipPhone,vipSite,newTransactionTime,payMoney,giveMoney,remarks,petimg,timestamp})
+          .then((data)=>{
+            res.send({err:1,msg:'添加成功',_id:data[0]._id})
+          })
+        }
       })
+      
+      
     }
   })
 })

@@ -21,7 +21,7 @@ class PetAdd extends React.Component{
     this.setState({petSex: e.target.value});
   };
   //是否绝育函数
-  onChangeNobaby = e =>{
+  onChangeNobaby = e =>{ 
     this.setState({Nobaby: e.target.value});
   }
   //给upload穿的方法 改变我的 petimg的
@@ -37,7 +37,8 @@ class PetAdd extends React.Component{
       values._id = this.state._id
       values.petimg = this.state.petimg
       let {petSex,Nobaby,petName,petSpecies,petAge,petBreed,petHeight,petWeight,petimg}=values
-      if(!petSex||!Nobaby||!petName||!petSpecies||!petAge||!petBreed||!petHeight||!petWeight||!petimg){
+      // !petSex||!Nobaby||!petName||!petSpecies||!petAge||!petBreed||!petHeight||!petWeight||!petimg
+      if(0){
         message.error('请输入完整的宠物信息');
       }else{
         this.setState({iconLoading:true})
@@ -47,6 +48,9 @@ class PetAdd extends React.Component{
         .then((data)=>{
           this.setState({iconLoading:false})
           message.success('宠物信息添加成功');
+          setTimeout(()=>{
+            this.props.changeSuccessShow(true)
+          },500)
         })
       }
     });
@@ -58,7 +62,6 @@ class PetAdd extends React.Component{
     const { getFieldDecorator } = this.props.form;
     let {petreg} = this.state
     return(
-        <Form>
           <Card className={less.addBoxRight}>
           <Button  className={less.header} >宠物信息</Button>
           <div className={less.vipName}>
@@ -124,7 +127,6 @@ class PetAdd extends React.Component{
               提交
           </Button>
           </Card>
-      </Form>
     )
   }
 }

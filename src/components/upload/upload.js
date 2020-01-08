@@ -20,12 +20,17 @@ function beforeUpload(file) {
   return isJpgOrPng && isLt2M;
 }
 class UploadImg extends React.Component{
-  constructor(){
+  constructor(props){
     super()
     this.state={
       loading: false,
+      imageUrl:props.imageUrl
     }
   }
+  componentWillReceiveProps(props){
+    let{imageUrl}=props
+    this.setState({imageUrl})
+  }   
   // 改变时间触发的函数
   handleChange = info => {
     if (info.file.status === 'uploading') {

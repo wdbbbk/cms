@@ -12,9 +12,10 @@ export  const manageList = async (page, pageSize,arrow,sortcol)=>{
 //会员添加
 export  const manageAdd = async (data)=>{
   let{vipName,vipPhone,vipSite,newTransactionTime,payMoney,giveMoney,remarks,timestamp} = data
-  let timeArr = (newTransactionTime+'0').split(' ')
-  let hour = timeArr[4].split(':')
-  newTransactionTime = `${timeArr[3]} ${timeArr[1]} ${hour[0]-8} ${hour[1]} ${timeArr[0]}`
+  // let timeArr = (newTransactionTime+'0').split(' ')
+  // let hour = timeArr[4].split(':')
+  // newTransactionTime = `${timeArr[3]} ${timeArr[1]} ${hour[0]-8} ${hour[1]} ${timeArr[0]}`
+
   let res = await axios.post('/cms/Vipmanage/add',
     {vipName,vipPhone,vipSite,newTransactionTime,payMoney,giveMoney,remarks,timestamp}
   )
