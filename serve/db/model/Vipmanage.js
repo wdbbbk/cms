@@ -1,11 +1,27 @@
 const mongoose = require('mongoose')
 let VipManageSchema = mongoose.Schema({
-  petname:{type:String,require:true},
-  petage:{type:String,require:true},
-  petsex:{type:String,require:true},
-  hostname:{type:String,require:true},
-  hostphone:{type:String,equire:true},
-  petimg:{type:String,default:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1578065217392&di=055c86be6806abb090d6d413aa86237f&imgtype=0&src=http%3A%2F%2Fimgwx5.2345.com%2Fdypcimg%2Fzongyi%2Fimg%2Fb%2F9%2Fsup28642_223x310.jpg'},
+  vipName:{type:String,require:true},
+  vipPhone:{type:String,require:true},
+  vipSite:{type:String,require:true},
+  newTransactionTime:{type:String,require:true},
+  payMoney:{type:String,require:true},
+  giveMoney:{type:String,default:'0'},
+  remarks:{type:String,default:'无备注信息'},
+  vipGrade:{type:String,default:'银卡'}, //会员等级
+  vipID:{type:String,default:'0001'}, // 会员id
+  vipIDcard:{type:String,default:'0001'}, //会员卡id
+  // 宠物的信息
+  petSex:{type:String,require:true},
+  Nobaby:{type:String,require:true},
+  petName:{type:String,require:true},
+  petSpecies:{type:String,require:true},
+  petAge:{type:String,require:true},
+  petBreed:{type:String,require:true},
+  petHeight:{type:String,require:true},
+  petWeight:{type:String,require:true},
+  petRemarks:{type:String,require:true}, 
+  petimg:{type:String,require:true}, 
+
 })
 // schema对象与数据库建立联系
 let VipManageModel = mongoose.model('vipManage',VipManageSchema)

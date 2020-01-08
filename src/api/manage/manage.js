@@ -11,17 +11,28 @@ export  const manageList = async (page, pageSize)=>{
 }
 //会员添加
 export  const manageAdd = async (data)=>{
-  const{petname,petage,petsex,hostname,hostphone,petimg} = data
+  let{vipName,vipPhone,vipSite,newTransactionTime,payMoney,giveMoney,remarks} = data
+  let timeArr = (newTransactionTime+'0').split(' ')
+  let hour = timeArr[4].split(':')
+  newTransactionTime = `${timeArr[3]} ${timeArr[1]} ${hour[0]-8} ${hour[1]} ${timeArr[0]}`
   let res = await axios.post('/cms/Vipmanage/add',
-  {petname,petage,petsex,hostname,hostphone,petimg}
+    {vipName,vipPhone,vipSite,newTransactionTime,payMoney,giveMoney,remarks}
+  )
+  return(res)
+}
+// 会员宠物信息添加
+export  const petAdd = async (data)=>{
+  let{_id,petSex,Nobaby,petName,petSpecies,petAge,petBreed,petHeight,petWeight,petRemarks,petimg} = data
+  let res = await axios.post('/cms/Vipmanage/petAdd',
+    {_id,petSex,Nobaby,petName,petSpecies,petAge,petBreed,petHeight,petWeight,petRemarks,petimg}
   )
   return(res)
 }
 //会员信息修改
-export  const changeVipMsg = async (req)=>{
-  let{petname,petage,petsex,hostname,hostphone,petimg,_id}=req
+export const changeVipMsg = async (req)=>{
+  let{vipName,petHeight,petWeight,vipSite,vipPhone,petimg,petName,Nobaby,_id}=req
   let res = await axios.post('/cms/Vipmanage/changeVipMsg',
-    {petname,petage,petsex,hostname,hostphone,petimg,_id}
+    {vipName,petHeight,petWeight,vipSite,vipPhone,petimg,petName,Nobaby,_id}
   )
   return(res)
 }

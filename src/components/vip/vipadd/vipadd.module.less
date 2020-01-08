@@ -1,26 +1,61 @@
 .addBox{
-  Input{
-    width: 200px;
-    display: inline-block;
-    margin-left: 10px;
-  }
-  .petimg{
-    display: none;
-  }
-  .vipName{
-    margin-left: 100px;
-  }
-  .vipPhone{
-    margin-left: 100px;
-  }
-  .vipSex{
-    margin-left: 100px;
-  }
-  .vipSite{
-    margin-left: 88px;
+  width: 500px;
+  height: 600px; 
+  transform: translateX(100px) translateY(20px);
+  .vipAdd{
+    transform: translateX(380px) ;
   }
 
 }
-div{
-  display: inline-block;
+  Input{
+    width:300px
+  }
+  .header{
+    margin-bottom: 10px;
+    background: rgb(255, 220, 0);
+  }
+  .vipName,.vipPhone,.vipSex,.vipSite,.payStyle,.remarks{
+    width:400px;
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    >span{
+      width: 100px;
+    }
+  }
+  
+  .transactionTime,.payMoney,.giveMoney{
+    width:400px;
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    .firstspan{
+      width: 100px;
+    }
+  }
+  .payStyle,.remarks{
+    >span{
+      width: 100px;
+    }
+  }
+  .payMoney,.giveMoney{
+    .firstspan{
+      width: 100px;             
+    }
+  }
+  Form{
+    height: 0;
+  }
+
+.addBoxRight{
+  width: 500px; 
+  height: 600px; 
+  transform: translateX(700px) translateY(20px);
+  .petAddSubmit{
+    transform: translateX(380px) translateY(-45px);
+  }
+  .vipSex{
+    margin-bottom: 10px;
+  }
+  
 }

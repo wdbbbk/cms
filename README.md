@@ -68,6 +68,7 @@ react-redux 已下载
     1. 要用箭头函数
     2. 或者是传递方法的时候 传递一个this过去
       hehe={this.hehe.bind(this)}
+    - 二次封装上传图片
 ### node 的小知识
   用到的插件
   - jsonwebtoken npm i jsonwebtoken  生成token
