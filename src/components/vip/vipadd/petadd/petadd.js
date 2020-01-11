@@ -37,8 +37,8 @@ class PetAdd extends React.Component{
       values._id = this.state._id
       values.petimg = this.state.petimg
       let {petSex,Nobaby,petName,petSpecies,petAge,petBreed,petHeight,petWeight,petimg}=values
-      // !petSex||!Nobaby||!petName||!petSpecies||!petAge||!petBreed||!petHeight||!petWeight||!petimg
-      if(0){
+      // 
+      if(!petSex||!Nobaby||!petName||!petSpecies||!petAge||!petBreed||!petHeight||!petWeight||!petimg){
         message.error('请输入完整的宠物信息');
       }else{
         this.setState({iconLoading:true})
@@ -115,7 +115,7 @@ class PetAdd extends React.Component{
           </div>
           
           {/* 上传图片组件 */}
-          <UploadImg callback={this.callback} ></UploadImg>
+          <UploadImg callback={this.callback} imageUrl={this.state.petimg}></UploadImg>
           <Button type="primary" 
             className={less.petAddSubmit}
             disabled={petreg?'':'disabled'} 

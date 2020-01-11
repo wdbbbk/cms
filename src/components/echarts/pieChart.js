@@ -1,76 +1,75 @@
 import React from 'react'
 import ReactEcharts from 'echarts-for-react'
+import { Card } from 'antd'
+import less from './pieChart.module.less'
 class Pit extends React.Component{
   constructor(){
     super()
     this.state={
       option:{
-        title: {
-          text: '折线图堆叠'
+      title: {
+        text: '周统计'
       },
       tooltip: {
-          trigger: 'axis'
+        trigger: 'axis'
       },
       legend: {
-          data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+        data: ['猫粮', '寄养', '玩具', '医疗', '美容']
       },
-      grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true
-      },
+      
       toolbox: {
-          feature: {
-              saveAsImage: {}
-          }
+        feature: {
+          saveAsImage: {}
+        }
       },
       xAxis: {
-          type: 'category',
-          boundaryGap: false,
-          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+        type: 'category',
+        boundaryGap: false,
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
       },
       yAxis: {
-          type: 'value'
+        type: 'value'
       },
       series: [
-          {
-              name: '邮件营销',
-              type: 'line',
-              stack: '总量',
-              data: [120, 132, 101, 134, 90, 230, 210]
-          },
-          {
-              name: '联盟广告',
-              type: 'line',
-              stack: '总量',
-              data: [220, 182, 191, 234, 290, 330, 310]
-          },
-          {
-              name: '视频广告',
-              type: 'line',
-              stack: '总量',
-              data: [150, 232, 201, 154, 190, 330, 410]
-          },
-          {
-              name: '直接访问',
-              type: 'line',
-              stack: '总量',
-              data: [320, 332, 301, 334, 390, 330, 320]
-          },
-          {
-              name: '搜索引擎',
-              type: 'line',
-              stack: '总量',
-              data: [820, 932, 901, 934, 1290, 1330, 1320]
-          }
+        {
+          name: '猫粮',
+          type: 'line',
+          stack: '总量',
+          data: [120, 132, 101, 134, 90, 230, 210]
+        },
+        {
+          name: '寄养',
+          type: 'line',
+          stack: '总量',
+          data: [220, 182, 191, 234, 290, 330, 310]
+        },
+        {
+          name: '玩具',
+          type: 'line',
+          stack: '总量',
+          data: [150, 232, 201, 154, 190, 330, 410]
+        },
+        {
+          name: '医疗',
+          type: 'line',
+          stack: '总量',
+          data: [320, 332, 301, 334, 390, 330, 320]
+        },
+        {
+          name: '美容',
+          type: 'line',
+          stack: '总量',
+          data: [820, 932, 901, 934, 1290, 1330, 1320]
+        }
       ]
       }
     }
   }
   render(){
     return(
-      <ReactEcharts option={this.state.option} />
+      <Card className={less.pieChart}>
+        <ReactEcharts option={this.state.option} />
+      </Card>
     )
   }
 }

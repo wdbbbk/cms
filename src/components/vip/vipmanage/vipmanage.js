@@ -5,6 +5,7 @@ import {manageList} from '../../../api/manage/manage'
 import {delVip} from '../../../api/manage/manage'
 import less from './table.module.less'
 import DrawerBox from './drawer/drawer'
+import BayRecord from './bayRecord/bayRecord'
 const { confirm } = Modal;
 class UserManage extends React.Component{
   constructor(){
@@ -62,7 +63,7 @@ class UserManage extends React.Component{
           width:100,
           render:()=>{
             return(
-              <Button>查</Button>
+              <BayRecord></BayRecord>
             )
           }
         },
@@ -156,6 +157,7 @@ class UserManage extends React.Component{
   render(){
     return(
       <Fragment>
+        
         <HaederQuery getdata={this.getdata} queryUpdata={this.queryUpdata} loadingfn={this.loadingfn} loading={this.state.loading}></HaederQuery>
         <Drawer 
           width={600}

@@ -9,6 +9,7 @@ const vipadd = loadRouter(()=>import('../components/vip/vipadd/vipadd'))
 const ShoppingToy = loadRouter(()=>import('../components/shopping/shoppingToy/shoppingToy'))
 const ShoppingSnacks = loadRouter(()=>import('../components/shopping/shoppingSnacks/shoppingSnacks'))
 const ShoppingFood = loadRouter(()=>import('../components/shopping/shoppingFood/shoppingFood'))
+const Fourzerofour = loadRouter(()=>import('../components/allpage/fourzerofour'))
 
 class router extends React.Component{
   render(){
@@ -23,13 +24,15 @@ class router extends React.Component{
                 <Switch>
                   <Redirect exact from='/admin' to='/admin/home'></Redirect>
                   <Route exact path='/admin/home' component={Home}></Route>
-                  {/*  */}
+                  {/* vip列表 */}
                   <Route exact path='/admin/vip/vipmanage' component={vipmanage}></Route>
                   <Route exact path='/admin/vip/vipadd' component={vipadd}></Route>
                   {/* 商品路由 */}
                   <Route exact path='/admin/shopping/toy' component={ShoppingToy}></Route>
                   <Route exact path='/admin/shopping/snacks' component={ShoppingSnacks}></Route>
                   <Route exact path='/admin/shopping/food' component={ShoppingFood}></Route>
+                  {/* 404端口 */}
+                  <Route exact path='' component={Fourzerofour}></Route>
                 </Switch>
               </Admin>
             )

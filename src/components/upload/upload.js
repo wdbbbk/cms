@@ -33,6 +33,7 @@ class UploadImg extends React.Component{
   }   
   // 改变时间触发的函数
   handleChange = info => {
+    console.log('到我了')
     if (info.file.status === 'uploading') {
       
       this.setState({ loading: true });
