@@ -3,10 +3,10 @@ const express = require('express')
 // 加载路由
 const router = express.Router()
 // 用于商品增删改查
-const spManage = require('../db/model/spmanage') 
+const suManage = require('../db/model/sumanage') 
 /**
  * @api {get} http://localhost:3030/spmanage/add
- * @apiName  spmanage/add                   
+ * @apiName  suManage /add                   
  * @apiGroup  商品信息添加                  
  *        
  * @apiParam {String} spname  商品名称
@@ -22,7 +22,7 @@ const spManage = require('../db/model/spmanage')
 router.post('/add',(req,res)=>{
   const {spname,img,price,brand,inventory} = req.body
   console.log(spname,img,price,brand,inventory)
-  spManage.insertMany({spname,img,price,brand,inventory})
+  suManage.insertMany({spname,img,price,brand,inventory})
   .then((data)=>{
     res.send({err:1,msg:'添加成功'})
   })
@@ -40,10 +40,10 @@ router.post('/add',(req,res)=>{
 // 查找商品 接口
 router.post('/inquiry',(req,res)=>{
   const {size,pageSize} = req.body
-  spManage.find()
+  suManage.find()
   .then(data=>{
     let datalength = data.length
-    spManage.find().limit(pageSize).skip(size) //查找 截几条 第几条开始截  
+    suManage.find().limit(pageSize).skip(size) //查找 截几条 第几条开始截  
     .then((data)=>{
       res.send({data,datalength})
     })
@@ -63,7 +63,7 @@ router.post('/inquiry',(req,res)=>{
 // 模糊 查找商品 接口
 router.post('/keyword',(req,res)=>{
   const {keyword} = req.body
-  spManage.find({$or:[{"spname":keyword},{"brand": keyword}]})
+  suManage.find({$or:[{"spname":keyword},{"brand": keyword}]})
   .then(data=>{
     res.send({err:1,msg:'查询成功',data})
   })
@@ -84,7 +84,7 @@ router.post('/keyword',(req,res)=>{
 router.post('/del',(req,res)=>{
   const {_id} = req.body
   console.log(_id)
-  spManage.deleteMany({_id})
+  suManage.deleteMany({_id})
   .then((data)=>{
     console.log(data)
     res.send({err:1,msg:'删除成功'})
@@ -110,7 +110,7 @@ router.post('/del',(req,res)=>{
 router.post('/updata',(req,res)=>{
   const {_id,spname,img,price,brand,inventory} = req.body
   console.log(spname,img,price,brand,inventory)
-  spManage.update({_id},{spname,img,price,brand,inventory})
+  suManage.update({_id},{spname,img,price,brand,inventory})
   .then((data)=>{
     console.log(data)
     res.send({err:1,msg:'修改成功'})
