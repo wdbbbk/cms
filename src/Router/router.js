@@ -10,6 +10,7 @@ const ShoppingToy = loadRouter(()=>import('../components/shopping/shoppingToy/sh
 const ShoppingSnacks = loadRouter(()=>import('../components/shopping/shoppingSnacks/shoppingSnacks'))
 const ShoppingFood = loadRouter(()=>import('../components/shopping/shoppingFood/shoppingFood'))
 const Fourzerofour = loadRouter(()=>import('../components/allpage/fourzerofour'))
+const AddressUi = loadRouter(()=>import('../components/baidu/baidu'))
 
 class router extends React.Component{
   render(){
@@ -31,6 +32,8 @@ class router extends React.Component{
                   <Route exact path='/admin/shopping/toy' component={ShoppingToy}></Route>
                   <Route exact path='/admin/shopping/snacks' component={ShoppingSnacks}></Route>
                   <Route exact path='/admin/shopping/food' component={ShoppingFood}></Route>
+                  {/* 服务端口 */}
+                  <Route exact path='/admin/serve/petfoster' component={AddressUi}></Route>
                   {/* 404端口 */}
                   <Route exact path='' component={Fourzerofour}></Route>
                 </Switch>

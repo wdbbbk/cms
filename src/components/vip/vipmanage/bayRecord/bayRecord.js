@@ -41,7 +41,7 @@ class BayRecord extends React.Component{
           onCancel={this.handleCancel}
           footer={null}
           width='700px'
-          centered='true'
+          centered={true}
         >
           <div className={less.Box} style={{height:'500px',overflow:'auto'}}>
             <p>2017年8月3日猫粮五斤</p>

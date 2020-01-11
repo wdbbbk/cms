@@ -7,6 +7,8 @@ import AddSuccess from './addSuccess/addSuccess';
 import locale from 'antd/es/date-picker/locale/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
+import hc from '../../../utils/hc'
+import {withRouter} from 'react-router-dom'
 moment.locale('zh-cn');
 
 //创建类组件
@@ -107,10 +109,6 @@ class Vipadd extends React.Component{
             <span className={less.firstspan}>办理时间 :</span>
             {getFieldDecorator('transactionTime', {})(
               <DatePicker locale={locale} onChange={this.onChangeTime} />
-<<<<<<< HEAD
-=======
-
->>>>>>> 8f42c6f80ab2a7e260d990ae44ff253b0897d425
             )}
           </div>
           <div className={less.payMoney}>
@@ -157,4 +155,4 @@ class Vipadd extends React.Component{
     )
   }
 }
-export default Form.create({})(Vipadd) 
+export default withRouter(hc(Form.create({})(Vipadd)))

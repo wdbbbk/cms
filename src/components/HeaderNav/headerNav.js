@@ -2,6 +2,7 @@ import React from 'react'
 import less from './headerNav.module.less'
 import { Menu, Dropdown, Icon , Avatar} from 'antd';
 import {Link} from 'react-router-dom'
+import { Modal, Button } from 'antd';
 const user = [
   {key:'个人中心',icon:'user',path:'/admin/user/center'},
   {key:'个人设置',icon:'setting',path:'/admin/user/set'},
@@ -29,7 +30,7 @@ class HeaderNav extends React.Component{
       <Dropdown  overlay={menu} className={less['ant-dropdown-link']}>
         <div>
           <Avatar src="/Avatar.png" />
-          <span>Domnayo</span> 
+          <span className={less.text}>Domnayo</span> 
         </div>
       </Dropdown>
     )

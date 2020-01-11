@@ -3,22 +3,33 @@ import less from './admin.module.less'
 import { Layout , Icon } from 'antd';
 import CusNav from '../../components/CustNav/cusNav'
 import HeaderNav from '../../components/HeaderNav/headerNav'
+import hc from '../../utils/hc'
+import {withRouter} from 'react-router-dom'
 const { Header, Sider, Content } = Layout;
 class Admin extends React.Component {
-  state = {
-    collapsed: false,
-  };
+  constructor(){
+    super()
+    this.state = {
+      collapsed: false,
+      logo:true
+    };
+  }
+  
   toggle = () => {
     this.setState({
+      logo:!this.state.logo,
       collapsed: !this.state.collapsed,
     });
   };
+  // componentDidMount(){
+  //   console.log(this.props)
+  // }
   render() {
     return (
       <Layout className={less.fillBox}>
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
-          <div className={less.logo}>
-          </div>
+          {/* logo */}
+          {this.state.logo?<div className={less.logo}><img width='150px' height='32px' src='/logo.jpg'/></div>:<div className={less.logologo}><img width='30px' src='/logologo.jpg' /></div>}
           <CusNav></CusNav>
         </Sider>
         <Layout>
@@ -28,7 +39,6 @@ class Admin extends React.Component {
               type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
               onClick={this.toggle}
             />
-            {/* <h1 className={less.headline}>方长君的后宫后台管理系统</h1> */}
             <HeaderNav></HeaderNav>
           </Header>
           <Content className={less.content}>
@@ -39,4 +49,5 @@ class Admin extends React.Component {
     );
   }
 }
+// export default hc(Admin);
 export default Admin;
