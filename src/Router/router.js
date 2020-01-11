@@ -9,12 +9,16 @@ const vipadd = loadRouter(()=>import('../components/vip/vipadd/vipadd'))
 const ShoppingToy = loadRouter(()=>import('../components/shopping/shoppingToy/shoppingToy'))
 const ShoppingSnacks = loadRouter(()=>import('../components/shopping/shoppingSnacks/shoppingSnacks'))
 const ShoppingFood = loadRouter(()=>import('../components/shopping/shoppingFood/shoppingFood'))
+<<<<<<< HEAD
 const cosmetologym = loadRouter(()=>import('../components/management/Cosmetology/cosmetologym'))
 const fostermanagem = loadRouter(()=>import('../components/management/Fostermanage/fostermanagem'))
 const pcarem = loadRouter(()=>import('../components/management/Pcare/pcarem'))
 const pcaremadd = loadRouter(()=>import('../components/management/Pcare/pcaremadd'))
 const pcaremlist = loadRouter(()=>import('../components/management/Pcare/pcaremlist'))
 
+=======
+const Fourzerofour = loadRouter(()=>import('../components/allpage/fourzerofour'))
+>>>>>>> 33adefcd79158789da5b24699b8f0c0ee14a94f7
 
 class router extends React.Component{
   render(){
@@ -29,7 +33,7 @@ class router extends React.Component{
                 <Switch>
                   <Redirect exact from='/admin' to='/admin/home'></Redirect>
                   <Route exact path='/admin/home' component={Home}></Route>
-                  {/*  */}
+                  {/* vip列表 */}
                   <Route exact path='/admin/vip/vipmanage' component={vipmanage}></Route>
                   <Route exact path='/admin/vip/vipadd' component={vipadd}></Route>
                   {/* 商品路由 */}
@@ -43,6 +47,8 @@ class router extends React.Component{
                   <Route exact path='/admin/management/pcarem' component={pcarem}></Route>
                   <Route exact path='/admin/management/pcarem/add' component={pcaremadd}></Route>
                   <Route exact path='/admin/management/pcarem/list' component={pcaremlist}></Route>
+                  {/* 404端口 */}
+                  <Route exact path='' component={Fourzerofour}></Route>
                 </Switch>
               </Admin>
             )

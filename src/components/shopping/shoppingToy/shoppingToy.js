@@ -1,5 +1,5 @@
 import React, { Component,Fragment } from 'react'
-import { Table , Pagination,  Button  ,Drawer, Input, Card } from 'antd';
+import { Table , Pagination,  Button  ,Drawer, Input, Card,Modal } from 'antd';
 import SpLess from './shoppingTop.module.less'
 import {SpList,SpListdel,SpKeyword} from '../../../api/shopping/spList'
 import Spup from '../shoppingToy/spup/soup'
@@ -12,7 +12,7 @@ export class ShoppingToy extends Component {
       alState:true,// 用来控制抽屉的切换
       visible:false, // 控制抽屉显示隐藏
       page:1, // 当前页
-      pageSize:6, // 每页的数量
+      pageSize:5, // 每页的数量
       columns: //表头数据
       [
         {
@@ -70,6 +70,7 @@ export class ShoppingToy extends Component {
                     SpList({page:this.state.page,pageSize:this.state.pageSize})
                       .then((data)=>{
                         this.data= this.setState({data})
+
                       })
                   })
                 }}>删除</Button>
@@ -93,17 +94,23 @@ export class ShoppingToy extends Component {
     this.setState({
       visible: true,
     });
-  };
+  }
 
   onClose = () => {
     this.setState({
       visible: false,
     });
-  };
+  }
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  }
   render() {
     return (
       <Fragment>
         <Card>
+          {/* 模糊搜索框 */}
           <Search placeholder="请输入商品名称或品牌" 
                   onSearch={
                     (value)=>{
@@ -147,6 +154,7 @@ export class ShoppingToy extends Component {
        
         {/* 商品更新的抽屉 */}
         <Drawer
+          width='400'
           title={this.state.alState?'添加商品':'修改商品'}
           placement="right"
           closable={false}

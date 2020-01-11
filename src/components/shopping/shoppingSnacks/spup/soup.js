@@ -1,10 +1,10 @@
 // 商品更新的抽屉
 import React,{Fragment} from 'react'
 import { Button ,message} from 'antd'
-import {SpUpdata,SpList,Spadd} from '../../../../api/shopping/spList'
-import spless from './spup.module.less'
+import {SuUpdata,SuList,Suadd} from '../../../../api/shoppongSnacks/snList'
+import suless from './spup.module.less'
 // 上传图片的文件
-import UploadImg from '../../../upload/upload'
+// import UploadImg from '../../../upload/upload'
 class Spup extends React.Component {
   constructor(props){
     super()
@@ -30,43 +30,43 @@ class Spup extends React.Component {
     
     return (
       <Fragment>
-          <i className={spless['name']}>商品名称</i>
-          <input className={spless['input']} type='text' value={spname} onChange={(e)=>{
+          <i className={suless['name']}>商品名称</i>
+          <input className={suless['input']} type='text' value={spname} onChange={(e)=>{
             this.setState({spname:e.target.value})
             console.log(e.target.value)
           }}/>
-          <i className={spless['name']}>商品图片</i>
+          <i className={suless['name']}>商品图片</i>
           {/* <UploadImg callback={this.callback} imageUrl={this.state.imageUrl}></UploadImg> */}
-          <input className={spless['input']} type="text" value={img} onChange={(e)=>{
+          <input className={suless['input']} type="text" value={img} onChange={(e)=>{
             this.setState({img:e.target.value})    
           }}/>
-          <i className={spless['name']}>商品价格</i>
-          <input className={spless['input']} type='Number' value={price} onChange={(e)=>{
+          <i className={suless['name']}>商品价格</i>
+          <input className={suless['input']} type='Number' value={price} onChange={(e)=>{
             this.setState({price:e.target.value})
           }}/>
-          <i className={spless['name']}>品牌</i>
-          <input className={spless['input']} type='text'value={brand} onChange={(e)=>{
+          <i className={suless['name']}>品牌</i>
+          <input className={suless['input']} type='text'value={brand} onChange={(e)=>{
             this.setState({brand:e.target.value})
           }}/>
-          <i className={spless['name']}>库存</i>
-          <input className={spless['input']} type='Number'value={inventory} onChange={(e)=>{
+          <i className={suless['name']}>库存</i>
+          <input className={suless['input']} type='Number'value={inventory} onChange={(e)=>{
             this.setState({inventory:e.target.value})
           }}/>
           <Button 
-                  className={spless['button']}
+                  className={suless['button']}
                   type="primary" 
                   shape="round" 
                   icon="plus" 
                   onClick={()=>{
                     if(this.props.alState){
-                      Spadd(this.state)
+                      Suadd(this.state)
                       .then(()=>{
                           message
                           .loading('正在添加中', 2.5)
                           .then(() => message.success('添加成功', 2.5))
                       })
                     }else{
-                      SpUpdata(this.state)
+                      SuUpdata(this.state)
                       .then((data)=>{
                         message
                           .loading('正在修改中', 2.5)

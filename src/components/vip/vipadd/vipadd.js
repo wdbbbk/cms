@@ -50,8 +50,8 @@ class Vipadd extends React.Component{
       values.newTransactionTime=this.state.newTransactionTime
       values.timestamp = new Date().getTime()
       let {vipName,vipPhone,transactionTime,payMoney,giveMoney} = values
-      // !vipName||!vipPhone||!transactionTime||!payMoney||!giveMoney
-      if(0){
+      // 
+      if(!vipName||!vipPhone||!transactionTime||!payMoney||!giveMoney){
         message.error('请输入完整的信息');
         return
       }else{
@@ -107,7 +107,10 @@ class Vipadd extends React.Component{
             <span className={less.firstspan}>办理时间 :</span>
             {getFieldDecorator('transactionTime', {})(
               <DatePicker locale={locale} onChange={this.onChangeTime} />
+<<<<<<< HEAD
+=======
 
+>>>>>>> 8f42c6f80ab2a7e260d990ae44ff253b0897d425
             )}
           </div>
           <div className={less.payMoney}>
