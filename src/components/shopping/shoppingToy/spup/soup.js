@@ -8,6 +8,7 @@ class Spup extends React.Component {
   constructor(props){
     super()
     this.state=props.res==''?{spname:'',img:'',price:'',brand:'',inventory:''} :props.res
+    this.state.img=''
   }
   callback=(data)=>{
     this.setState({img:data})
@@ -17,6 +18,7 @@ class Spup extends React.Component {
     if(props.res){
       let {spname,img,price,brand,inventory} = props.res
       this.setState({spname,img,price,brand,inventory})
+
     }else{
       this.setState({spname:'',img:'',price:'',brand:'',inventory:''})
     }
@@ -33,7 +35,7 @@ class Spup extends React.Component {
             console.log(e.target.value)
           }}/>
           <i>商品图片</i>
-          <UploadImg callback={this.callback}></UploadImg>
+          <UploadImg callback={this.callback} imageUrl={this.state.imageUrl}></UploadImg>
           <i>商品价格</i>
           <input type='Number' value={price} onChange={(e)=>{
             this.setState({price:e.target.value})

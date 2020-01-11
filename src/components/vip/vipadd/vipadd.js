@@ -107,6 +107,10 @@ class Vipadd extends React.Component{
             <span className={less.firstspan}>办理时间 :</span>
             {getFieldDecorator('transactionTime', {})(
               <DatePicker locale={locale} onChange={this.onChangeTime} />
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8f42c6f80ab2a7e260d990ae44ff253b0897d425
             )}
           </div>
           <div className={less.payMoney}>

@@ -1,8 +1,9 @@
 import React, { Component,Fragment } from 'react'
-import { Table , Pagination,  Button  ,Drawer} from 'antd';
+import { Table , Pagination,  Button  ,Drawer, Input, Card } from 'antd';
 import SpLess from './shoppingTop.module.less'
-import {SpList,SpListdel} from '../../../api/shopping/spList'
+import {SpList,SpListdel,SpKeyword} from '../../../api/shopping/spList'
 import Spup from '../shoppingToy/spup/soup'
+const { Search } = Input;
 export class ShoppingToy extends Component {
   constructor(){
     super()
@@ -11,7 +12,7 @@ export class ShoppingToy extends Component {
       alState:true,// 用来控制抽屉的切换
       visible:false, // 控制抽屉显示隐藏
       page:1, // 当前页
-      pageSize:7, // 每页的数量
+      pageSize:6, // 每页的数量
       columns: //表头数据
       [
         {
@@ -66,7 +67,7 @@ export class ShoppingToy extends Component {
                 <Button type="danger" onClick={()=>{
                   let _id = res._id
                   SpListdel(_id).then(()=>{
-                    SpList({page:this.state.page,pageSize:7})
+                    SpList({page:this.state.page,pageSize:this.state.pageSize})
                       .then((data)=>{
                         this.data= this.setState({data})
                       })
@@ -83,7 +84,7 @@ export class ShoppingToy extends Component {
     }
   }
   componentDidMount(){
-    SpList({page:this.state.page,pageSize:7})
+    SpList({page:this.state.page,pageSize:this.state.pageSize})
     .then((data)=>{
       this.data= this.setState({data})
     })
@@ -99,30 +100,32 @@ export class ShoppingToy extends Component {
       visible: false,
     });
   };
-  shouldComponentUpdate(props,state){
-    console.log(state)
-    console.log(1)
-    
-    SpList({page:state.page,pageSize:7})
-    .then((data)=>{
-      console.log(data)
-      this.data= this.setState({data})
-    })
-    return true
-  }
   render() {
     return (
       <Fragment>
-      <div className={SpLess['Sp-box']}>
-        <Table  className= { SpLess['Tab-box'] }
-                columns={this.state.columns}
-                dataSource={this.state.data.data}
-                rowKey="_id" pagination={false} // key值 和 去掉默认分页
-        />
-      </div>
-      <div>
-        {/* 添加商品按钮 */}
-        <Button type="primary" 
+        <Card>
+          <Search placeholder="请输入商品名称或品牌" 
+                  onSearch={
+                    (value)=>{
+                      SpKeyword(value)
+                      .then((res)=>{
+                        console.log(res.data.data.length)
+                        let length = res.data.data.length
+                        if(length>0){
+                          let data = res.data
+                          this.setState({data:data})
+                        }else{
+                          window.alert('没有相关数据')
+                        }
+                      })
+                    }
+                    
+                  } 
+                  enterButton  
+                  className={SpLess['search']}/> 
+           {/* 添加商品按钮 */}
+        <Button type="primary"
+                className={SpLess['button']} 
                 shape="round" 
                 icon="plus" 
                 className={SpLess['Tab-add']}
@@ -132,6 +135,16 @@ export class ShoppingToy extends Component {
         >
           添加商品
         </Button>
+        </Card>
+      <div className={SpLess['Sp-box']}>
+        <Table  className= { SpLess['Tab-box'] }
+                columns={this.state.columns}
+                dataSource={this.state.data.data}
+                rowKey="_id" pagination={false} // key值 和 去掉默认分页
+        />
+      </div>
+      <div>
+       
         {/* 商品更新的抽屉 */}
         <Drawer
           title={this.state.alState?'添加商品':'修改商品'}
@@ -153,10 +166,11 @@ export class ShoppingToy extends Component {
                       // console.log(page)
                       // console.log(this)
                       this.setState({page:page})
-                      // console.log(this.state)
-                      // console(tihs.state)
-                      
-                      // console.log(this.state.page)
+
+                      SpList({page,pageSize:this.state.pageSize})
+                      .then((data)=>{
+                        this.data= this.setState({data})
+                      })
                     }}
         />
       </div>
