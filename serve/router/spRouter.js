@@ -41,14 +41,6 @@ router.post('/add',(req,res)=>{
 // 查找商品 接口
 router.post('/inquiry',(req,res)=>{
   const {size,pageSize} = req.body
-  console.log(size,pageSize)
-  // start =  (page--)*pageSize // 开始截取
-  // end = page*pageSize-1  // 结束截取
-   // 1 7 0-6
-   // 2 7 7-13
-   // 3 7 14-
-   // 4 7 27-
-  // console.log(spname,img,price,brand,inventory)
   spManage.find()
   .then(data=>{
     let datalength = data.length
@@ -60,6 +52,24 @@ router.post('/inquiry',(req,res)=>{
   
 })
 
+/**
+ * @api {get} http://localhost:3030/spmanage/keyword
+ * @apiName  spmanage/keyword                   
+ * @apiGroup  模糊查询商品信息                  
+ *        
+ * 
+ * @apiSuccess {Number} err 状态码. 
+ * @apiSuccess {String} msg 信息提示.
+ */  
+// 模糊 查找商品 接口
+router.post('/keyword',(req,res)=>{
+  const {keyword} = req.body
+  spManage.find({$or:[{"spname":keyword},{"brand": keyword}]})
+  .then(data=>{
+    res.send({err:1,msg:'查询成功',data})
+  })
+  
+})
 
 /**
  * @api {post} http://localhost:3030/spmanage/del
