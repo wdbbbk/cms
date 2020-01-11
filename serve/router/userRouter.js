@@ -6,8 +6,10 @@ const {sendMail} = require('../utils/email')
 // 登录接口
 router.get('/login',(req,res)=>{
   const {userName,passWord} = req.query
+  console.log(userName,passWord)
   loginModel.find({userName:userName,passWord:passWord})
   .then((data)=>{
+    console.log(data)
     if(data.length){
       //  生成一个token
       let payload = {userName,passWord}

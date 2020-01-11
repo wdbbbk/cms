@@ -7,9 +7,9 @@ const Fostermanagement = require('../db/model/Fostermanagement')
 
 //添加宠物美容信息接口 
 router.post('/fosteradd',(req,res)=>{
-  const {shop,peoplename,telephpne,petnane,Coatcolor,room,weight,sex,age,fosternum,food} = req.body
-  console.log(shop,peoplename,telephpne,petnane,Coatcolor,room,weight,sex,age,fosternum,food)
-  Fostermanagement.insertMany({shop,peoplename,telephpne,petnane,Coatcolor,room,weight,sex,age,fosternum,food})
+  const {shop,img,peoplename,telephpne,petnane,Coatcolor,room,weight,sex,age,fosternum,food} = req.body
+  console.log(shop,img,peoplename,telephpne,petnane,Coatcolor,room,weight,sex,age,fosternum,food)
+  Fostermanagement.insertMany({shop,img,peoplename,telephpne,petnane,Coatcolor,room,weight,sex,age,fosternum,food})
   .then((data)=>{
       console.log(data)
       res.send({err:1,msg:'添加成功'})
@@ -21,7 +21,7 @@ router.post('/fosteradd',(req,res)=>{
 * @api {post}  http://localhost:3030/fostermanagement/fosteradd
 * @apiName  petfostercare/pcareadd                 
 * @apiGroup  宠物寄养管理信息添加                  
-*        
+* @apiParam {String} img 图片地址       
 * @apiParam {String} shop  店家名称
 * @apiParam {String} peoplename 主人名字
 * @apiParam {Number} telephpne  电话

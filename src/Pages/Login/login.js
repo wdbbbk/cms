@@ -10,12 +10,14 @@ class Login extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
+     
       if (!err) {
         //账号密码输入了 可以发起网络请求了
         UserLogin(values.username,values.password)
         .then((data)=>{
+         
           if(data.err){
-            console.log(data)
+            
             message.loading('登录成功',.5,()=>{
               window.location.href = '/admin/home'
               localStorage.setItem('token',data.token)

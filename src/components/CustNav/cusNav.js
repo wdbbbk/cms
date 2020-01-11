@@ -50,21 +50,38 @@ let arr = [
       {
         name:'宠物寄养',
         id:'2_0',
-        path:'/admin/serve/petfoster',
+        path:'/admin/management/pcarem',
         Icon:'database',
+        children:[
+          { 
+            name:'宠物信息添加',
+            path:'/admin/management/pcarem/add',
+            id:'2_0_1',
+            Icon:'database',
+          },
+          { 
+            name:'宠物信息列表',
+            path:'/admin/management/pcarem/list',
+            id:'2_0_2',
+            Icon:'database',
+          },
+
+
+        ]
       },
       {
         name:'单项美容',
         id:'2_1',
-        path:'/admin/serve/petwipeworm',
+        path:'/admin/management/cosmetologym',
         Icon:'database',
       },
       {
         name:'寄养管理',
         id:'2_2',
-        path:'/admin/serve/petvaccine',
+        path:'/admin/management/fostermanagem',
         Icon:'database',
       },
+      
     ]
   },
   {

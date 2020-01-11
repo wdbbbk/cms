@@ -4,6 +4,8 @@ import axios from '../../utils/axios'
 export const Spadd= async (data)=>{
   console.log(data)
   let res = await axios.post('/cms/spManage/add',data)
+  // console.log(res)
+  return res
 }
 // 查询商品
 export const SpList= async (data)=>{
@@ -26,4 +28,6 @@ export const SpListdel= async (_id)=>{
 // 修改商品
 export const SpUpdata= async (data)=>{
   let res = await axios.post('/cms/spManage/updata',data)
+  console.log(res)
+  return res
 }

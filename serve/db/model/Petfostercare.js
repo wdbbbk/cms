@@ -10,7 +10,8 @@ let PetFostcareSchema = mongoose.Schema({
     sallprice:{type:Number,require:false},
     cleandifficulty:{type:String,require:false},
     Productnumber:{type:Number,require:false},
-
+    img:{type:String,require:false},
+    
 
 
 
