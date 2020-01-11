@@ -9,6 +9,12 @@ const vipadd = loadRouter(()=>import('../components/vip/vipadd/vipadd'))
 const ShoppingToy = loadRouter(()=>import('../components/shopping/shoppingToy/shoppingToy'))
 const ShoppingSnacks = loadRouter(()=>import('../components/shopping/shoppingSnacks/shoppingSnacks'))
 const ShoppingFood = loadRouter(()=>import('../components/shopping/shoppingFood/shoppingFood'))
+const cosmetologym = loadRouter(()=>import('../components/management/Cosmetology/cosmetologym'))
+const fostermanagem = loadRouter(()=>import('../components/management/Fostermanage/fostermanagem'))
+const pcarem = loadRouter(()=>import('../components/management/Pcare/pcarem'))
+const pcaremadd = loadRouter(()=>import('../components/management/Pcare/pcaremadd'))
+const pcaremlist = loadRouter(()=>import('../components/management/Pcare/pcaremlist'))
+
 
 class router extends React.Component{
   render(){
@@ -30,6 +36,13 @@ class router extends React.Component{
                   <Route exact path='/admin/shopping/toy' component={ShoppingToy}></Route>
                   <Route exact path='/admin/shopping/snacks' component={ShoppingSnacks}></Route>
                   <Route exact path='/admin/shopping/food' component={ShoppingFood}></Route>
+
+                  {/* 服务管理 */}
+                  <Route exact path='/admin/management/cosmetologym' component={cosmetologym}></Route>
+                  <Route exact path='/admin/management/fostermanagem' component={fostermanagem}></Route>
+                  <Route exact path='/admin/management/pcarem' component={pcarem}></Route>
+                  <Route exact path='/admin/management/pcarem/add' component={pcaremadd}></Route>
+                  <Route exact path='/admin/management/pcarem/list' component={pcaremlist}></Route>
                 </Switch>
               </Admin>
             )

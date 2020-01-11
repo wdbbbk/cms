@@ -5,9 +5,9 @@ const router = express.Router()
 const Cosmetology = require('../db/model/Cosmetology')
 
 router.post('/cosmetologyadd',(req,res)=>{
-  const {shop,bigclass,smallclass,name,barcode,price,sallprice,cleandifficulty,Uppershelf,Productnumber} =req.body
-  console.log(shop,bigclass,smallclass,name,barcode,price,sallprice,cleandifficulty,Uppershelf,Productnumber)
-  Cosmetology.insertMany({shop,bigclass,smallclass,name,barcode,price,sallprice,cleandifficulty,Uppershelf,Productnumber})
+  const {shop,img,bigclass,smallclass,name,barcode,price,sallprice,cleandifficulty,Uppershelf,Productnumber} =req.body
+  console.log(shop,bigclass,img,smallclass,name,barcode,price,sallprice,cleandifficulty,Uppershelf,Productnumber)
+  Cosmetology.insertMany({shop,img,bigclass,smallclass,name,barcode,price,sallprice,cleandifficulty,Uppershelf,Productnumber})
   .then((data)=>{
     console.log(data)
     res.send({err:1,msg:'添加成功'})
@@ -22,7 +22,7 @@ router.post('/cosmetologyadd',(req,res)=>{
  * @apiName  petfostercare/pcareadd                 
  * @apiGroup  宠物寄养信息添加                  
  * 
- * 
+ * @apiParam {String} img 图片地址  
  * @apiParam {String} shop  店家名称
  * @apiParam {String} bigclass 大类别 
  * @apiParam {String} smallclass  小类别

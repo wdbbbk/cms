@@ -13,7 +13,7 @@ let  FosterManagementSchema = mongoose.Schema({
   age:{type:Number,require:false},
   fosternum:{type:String,require:false},
   food:{type:Boolean,require:false},
-
+  img:{type:String,require:false},
 
 
 })

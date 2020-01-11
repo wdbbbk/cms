@@ -10,7 +10,7 @@ let CosmetologySchema = mongoose.Schema({
   cleandifficulty:{type:String,require:false},
   Uppershelf:{type:Boolean,require:false},
   Productnumber:{type:Number,require:false},
-
+  img:{type:String,require:false},
 
 
 
